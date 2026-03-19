@@ -70,8 +70,13 @@ export default function Footer() {
                     flexWrap: 'wrap',
                     gap: '1rem'
                 }}>
-                    <p>&copy; 2026 Polly Concreto e Pinturas. Todos os direitos reservados.</p>
-                    <p>CNPJ: 42.172.271/0001-74</p>
+                    <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+                        <p>&copy; 2026 Polly Concreto e Pinturas. Todos os direitos reservados.</p>
+                        <p>CNPJ: 42.172.271/0001-74</p>
+                    </div>
+                    <p style={{ textAlign: 'right' }}>
+                        Desenvolvido com 🧡 pela <a href="https://camaly.com.br/" target="_blank" rel="noopener noreferrer" style={{ fontWeight: '500', color: 'var(--text-primary)' }}>Camaly</a>
+                    </p>
                 </div>
             </div>
         </footer>

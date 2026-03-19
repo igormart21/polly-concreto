@@ -43,6 +43,7 @@ export default function Header() {
                     <ul style={{ display: 'flex', gap: '2rem' }}>
                         <li><Link to="/">Início</Link></li>
                         <li><Link to="/sobre">Sobre a Empresa</Link></li>
+                        <li><Link to="/o-concreto">O Concreto Aparente</Link></li>
                         <li><Link to="/servicos">Serviços</Link></li>
                         <li><Link to="/projetos">Portfólio</Link></li>
                     </ul>
@@ -78,6 +79,7 @@ export default function Header() {
                 }}>
                     <Link to="/">Início</Link>
                     <Link to="/sobre">Sobre a Empresa</Link>
+                    <Link to="/o-concreto">O Concreto Aparente</Link>
                     <Link to="/servicos">Serviços</Link>
                     <Link to="/projetos">Portfólio</Link>
                     <Link to="/contato" className="btn btn-primary mt-4">Fale Conosco</Link>

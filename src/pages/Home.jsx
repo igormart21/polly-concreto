@@ -1,7 +1,13 @@
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { CheckCircle2, Award, Shield, ChevronRight, ArrowRight, Eye, Medal, Star } from 'lucide-react'
-import EssenciaVideo from '../assets/Obras /WhatsApp Video 2026-03-16 at 14.22.49 (1).mp4'
+import HeroImg1 from '../assets/3.png'
+import HeroImg2 from '../assets/as.png'
+import HeroImg3 from '../assets/Unknown.png'
+import EssenciaImg from '../assets/04.png'
+import RipadoImg from '../assets/Screen Shot 2026-03-19 at 1.31.37 PM.png'
+import LisoImg from '../assets/old-cement-wall-texture.jpg'
 import Proj1Img from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.22.47 (1).jpeg'
 import Celta1 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.26.34.jpeg'
 import Celta2 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.27.12 (1).jpeg'
@@ -20,65 +26,44 @@ const staggerContainer = {
 }
 
 export default function Home() {
+    const heroImages = [HeroImg1, HeroImg2, HeroImg3];
+    const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <>
             {/* 1. HERO SECTION PREMIUM */}
             <section style={{
                 position: 'relative',
-                minHeight: '100vh',
+                height: '100vh',
+                minHeight: '600px',
                 display: 'flex',
                 alignItems: 'center',
-                overflow: 'hidden',
-                paddingTop: '80px'
+                overflow: 'hidden'
             }}>
-                <div style={{
-                    position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                    background: 'linear-gradient(135deg, #0a0a0c 0%, #17181c 100%)',
-                    zIndex: -2
-                }} />
-                <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1200px' }}>
-                    <motion.div initial="hidden" animate="visible" variants={staggerContainer} style={{ maxWidth: '900px' }}>
-                        <motion.div variants={fadeInUp} style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '0.75rem', padding: '0.5rem 1.25rem',
-                            background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-strong)',
-                            borderRadius: '100px', color: 'var(--accent-silver)', fontSize: '0.85rem',
-                            fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '2.5rem'
-                        }}>
-                            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-primary)', boxShadow: '0 0 10px rgba(255,255,255,0.5)' }} />
-                            Padrão Arquitetônico Exclusivo
-                        </motion.div>
+                <AnimatePresence mode="wait">
+                    <motion.img
+                        key={currentHeroIndex}
+                        src={heroImages[currentHeroIndex]}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+                    />
+                </AnimatePresence>
 
-                        <motion.h1 variants={fadeInUp} style={{
-                            fontSize: 'clamp(3.5rem, 7vw, 6.5rem)', lineHeight: 1.05, fontWeight: 700,
-                            letterSpacing: '-0.04em', marginBottom: '1.5rem', color: 'var(--text-primary)'
-                        }}>
-                            A Arte Elevada<br />
-                            <span style={{ color: 'var(--text-muted)' }}>do Concreto</span> Aparente.
-                        </motion.h1>
+                {/* Protection for transparent header */}
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '150px', background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%)', pointerEvents: 'none', zIndex: 1 }} />
 
-                        <motion.p variants={fadeInUp} style={{
-                            fontSize: 'clamp(1.15rem, 2vw, 1.35rem)', color: 'var(--text-secondary)',
-                            maxWidth: '700px', marginBottom: '3.5rem', fontWeight: 300, lineHeight: 1.6
-                        }}>
-                            Há duas décadas entregando excelência técnica em lixamento, estucamento e tratamento de superfícies para residências e condomínios que exigem o <strong>padrão absoluto de acabamento</strong>.
-                        </motion.p>
-
-                        <motion.div variants={fadeInUp} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                            <Link to="/contato" className="btn btn-primary" style={{ padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '4px' }}>
-                                Solicitar Orçamento
-                            </Link>
-                            <Link to="/projetos" className="btn btn-outline" style={{ padding: '1.25rem 3rem', fontSize: '1.1rem', borderRadius: '4px' }}>
-                                Explorar Portfólio
-                            </Link>
-                        </motion.div>
-                    </motion.div>
-                </div>
-
-                {/* Floating Architectual Elements */}
-                <motion.div
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.1 }} transition={{ duration: 2 }}
-                    style={{ position: 'absolute', right: '-10%', top: '20%', width: '500px', height: '700px', border: '1px solid #fff', transform: 'rotate(15deg)', pointerEvents: 'none' }}
-                />
+                {/* Blend gradient into next section */}
+                <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '30vh', background: 'linear-gradient(to top, var(--bg-dark) 0%, transparent 100%)', pointerEvents: 'none', zIndex: 1 }} />
             </section>
 
             {/* 2. AUTORIDADE / CONFIANÇA INTRO */}
@@ -113,12 +98,9 @@ export default function Home() {
                             position: 'relative', aspectRatio: '4/5', background: 'var(--bg-elevated)', borderRadius: '4px',
                             border: '1px solid var(--border-strong)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden'
                         }}>
-                            <video
-                                src={EssenciaVideo}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
+                            <img
+                                src={EssenciaImg}
+                                alt="Polly Concreto Essência"
                                 style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
                             />
                             <div style={{ position: 'absolute', inset: '1rem', border: '1px solid rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
@@ -138,6 +120,42 @@ export default function Home() {
                                 Conheça a Polly Concreto <ArrowRight size={20} />
                             </Link>
                         </motion.div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* TIPOS DE ACABAMENTO */}
+            <section className="section" style={{ background: 'var(--bg-elevated)', borderTop: '1px solid var(--border-subtle)' }}>
+                <div className="container">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} style={{ textAlign: 'center', marginBottom: '5rem' }}>
+                        <span className="section-subtitle">Padrões de Execução</span>
+                        <h2 className="section-title">A Textura e Volume Ideais.</h2>
+                    </motion.div>
+
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+
+                        {/* RIPADO */}
+                        <motion.div variants={fadeInUp} style={{ background: 'var(--bg-panel)', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border-subtle)', transition: 'all 0.3s ease' }} className="hover-glass">
+                            <div style={{ position: 'relative', height: '350px', overflow: 'hidden' }} className="proj-card">
+                                <img src={RipadoImg} alt="Concreto Ripado" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="proj-img" />
+                            </div>
+                            <div style={{ padding: '2.5rem' }}>
+                                <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 700 }}>Concreto Ripado</h3>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>Realça de forma marcante as linhas, os veios e as texturas originais das fôrmas de madeira, trazendo um apelo brutalista sofisticado e volumétrico.</p>
+                            </div>
+                        </motion.div>
+
+                        {/* LISO */}
+                        <motion.div variants={fadeInUp} style={{ background: 'var(--bg-panel)', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border-subtle)', transition: 'all 0.3s ease' }} className="hover-glass">
+                            <div style={{ position: 'relative', height: '350px', overflow: 'hidden' }} className="proj-card">
+                                <img src={LisoImg} alt="Concreto Liso" style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="proj-img" />
+                            </div>
+                            <div style={{ padding: '2.5rem' }}>
+                                <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 700 }}>Concreto Liso</h3>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6 }}>Oferece um toque acetinado e perfeitamente uniforme. Ideal para ambientes e fachadas amplas que buscam extremo requinte minimalista em tons de concreto.</p>
+                            </div>
+                        </motion.div>
+
                     </motion.div>
                 </div>
             </section>
@@ -163,13 +181,13 @@ export default function Home() {
                         ].map((srv, idx) => (
                             <motion.div key={idx} variants={fadeInUp} style={{
                                 padding: '3.5rem 2.5rem', background: 'var(--bg-panel)', borderRadius: '4px', border: '1px solid var(--border-subtle)',
-                                transition: 'all 0.4s ease', cursor: 'pointer'
+                                transition: 'all 0.4s ease', cursor: 'pointer', display: 'flex', flexDirection: 'column'
                             }}
                                 onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-15px)'; e.currentTarget.style.borderColor = 'var(--accent-silver)'; }}
                                 onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}>
                                 <h3 style={{ fontSize: '1.5rem', marginBottom: '1.25rem', color: 'var(--text-primary)', fontWeight: 600 }}>{srv.t}</h3>
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>{srv.d}</p>
-                                <div style={{ color: 'var(--accent-silver)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2.5rem', flexGrow: 1 }}>{srv.d}</p>
+                                <div style={{ color: 'var(--accent-silver)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: 'auto' }}>
                                     Explorar <ChevronRight size={16} />
                                 </div>
                             </motion.div>

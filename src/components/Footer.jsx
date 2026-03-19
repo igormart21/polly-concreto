@@ -33,6 +33,7 @@ export default function Footer() {
                     <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-secondary)' }}>
                         <li><Link to="/">Início</Link></li>
                         <li><Link to="/sobre">Sobre a Empresa</Link></li>
+                        <li><Link to="/o-concreto">O Concreto Aparente</Link></li>
                         <li><Link to="/servicos">Especialidades e Serviços</Link></li>
                         <li><Link to="/projetos">Projetos Executados</Link></li>
                     </ul>

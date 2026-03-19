@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&display=swap');
 
 :root {
-  /* Premium Dark Theme Palette */
-  --bg-dark: #0f1012;
-  --bg-panel: #18191c;
-  --bg-elevated: #24262b;
+  /* Premium Concrete Theme Palette */
+  --bg-dark: #2F3136;
+  --bg-panel: #36393F;
+  --bg-elevated: #40444B;
 
   --text-primary: #f8f8f8;
   --text-secondary: #a3a6ab;

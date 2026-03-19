@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 import Proj1Img from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.22.47 (1).jpeg'
 import Celta1 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.26.34.jpeg'
@@ -38,7 +38,7 @@ import VilaNova5 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.51.44 (3
 import VilaNova6 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.51.44.jpeg'
 import VilaNova7 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.51.45.jpeg'
 
-const ProjectCard = ({ proj, fadeInUp }) => {
+const ProjectCard = ({ proj, fadeInUp, onOpenLightbox }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
 
     const hasMultiple = proj.images && proj.images.length > 1;
@@ -57,7 +57,7 @@ const ProjectCard = ({ proj, fadeInUp }) => {
         <motion.div variants={fadeInUp} style={{
             position: 'relative', height: '400px', borderRadius: '8px', overflow: 'hidden', cursor: 'pointer',
             background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)'
-        }} className="proj-card">
+        }} className="proj-card" onClick={() => onOpenLightbox(proj, currentIndex)}>
             {/* Image Layer */}
             <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
                 <AnimatePresence mode="wait">
@@ -125,7 +125,77 @@ const ProjectCard = ({ proj, fadeInUp }) => {
     )
 }
 
+const Lightbox = ({ data, onClose }) => {
+    const { proj, index } = data;
+    const [currentIndex, setCurrentIndex] = useState(index);
+    const hasMultiple = proj.images && proj.images.length > 1;
+
+    const nextImage = (e) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % proj.images.length)
+    }
+
+    const prevImage = (e) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + proj.images.length) % proj.images.length)
+    }
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            onClick={onClose}
+        >
+            <button onClick={onClose} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', zIndex: 10001 }}>
+                <X size={36} />
+            </button>
+
+            <div style={{ position: 'relative', width: '90%', maxWidth: '1200px', height: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={e => e.stopPropagation()}>
+                <AnimatePresence mode="wait">
+                    {proj.images[currentIndex].endsWith('.mp4') ? (
+                        <motion.video
+                            key={currentIndex}
+                            src={proj.images[currentIndex]}
+                            autoPlay loop playsInline controls
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
+                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', borderRadius: '4px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
+                        />
+                    ) : (
+                        <motion.img
+                            key={currentIndex}
+                            src={proj.images[currentIndex]}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.3 }}
+                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', borderRadius: '4px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
+                        />
+                    )}
+                </AnimatePresence>
+
+                {hasMultiple && (
+                    <>
+                        <button onClick={prevImage} style={{ position: 'absolute', left: '-2rem', top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', color: '#fff', width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(5px)' }}><ChevronLeft size={28} /></button>
+                        <button onClick={nextImage} style={{ position: 'absolute', right: '-2rem', top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', color: '#fff', width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', backdropFilter: 'blur(5px)' }}><ChevronRight size={28} /></button>
+                    </>
+                )}
+            </div>
+
+            <div style={{ position: 'absolute', bottom: '2rem', textAlign: 'center', color: '#fff' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.2rem' }}>{proj.title}</h3>
+                <p style={{ color: 'var(--accent-silver)' }}>{currentIndex + 1} / {proj.images.length}</p>
+            </div>
+        </motion.div>
+    )
+}
+
 export default function Projetos() {
+    const [lightboxData, setLightboxData] = useState(null)
     const fadeInUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
 
     const projetos = [
@@ -148,10 +218,17 @@ export default function Projetos() {
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
                     {projetos.map((proj, i) => (
-                        <ProjectCard key={i} proj={proj} fadeInUp={fadeInUp} />
+                        <ProjectCard key={i} proj={proj} fadeInUp={fadeInUp} onOpenLightbox={(p, idx) => setLightboxData({ proj: p, index: idx })} />
                     ))}
                 </div>
             </div>
+
+            <AnimatePresence>
+                {lightboxData && (
+                    <Lightbox data={lightboxData} onClose={() => setLightboxData(null)} />
+                )}
+            </AnimatePresence>
+
             <style>{`
                 .proj-card:hover .proj-img {
                     transform: scale(1.05);

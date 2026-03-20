@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
 import Proj1Img from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.22.47 (1).jpeg'
+import TerrasCapa from '../assets/Obras /PHOTO-2026-03-19-16-17-34.jpg'
+import Terras2 from '../assets/Obras /PHOTO-2026-03-19-16-18-47.jpg'
+import Terras3 from '../assets/Obras /PHOTO-2026-03-19-16-21-26.jpg'
 import Celta1 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.26.34.jpeg'
 import Celta2 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.27.12 (1).jpeg'
 import Celta3 from '../assets/Obras /WhatsApp Image 2026-03-16 at 14.27.12 (2).jpeg'
@@ -199,7 +202,7 @@ export default function Projetos() {
     const fadeInUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
 
     const projetos = [
-        { title: 'Cond. Terras de São José', subtitle: 'Itu - SP', images: [Proj1Img] },
+        { title: 'Cond. Terras de São José', subtitle: 'Itu - SP', images: [TerrasCapa, Terras2, Terras3, Proj1Img] },
         { title: 'Residência Ibirapuera', subtitle: 'Rua Celta - SP', images: [Celta1, Celta2, Celta3, Celta4] },
         { title: 'Morada dos Lagos', subtitle: 'Aldeia da Serra - SP', images: [Morada1, Morada2, Morada3, Morada4, Morada5] },
         { title: 'Cond. Fazenda Serrazul', subtitle: 'Itupeva - SP', images: [Serrazul1, Serrazul2, Serrazul3, Serrazul4, Serrazul5, Serrazul6] },

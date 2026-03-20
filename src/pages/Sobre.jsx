@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
+import HqOfficeImg from '../assets/polly_hq_office.png'
 
 export default function Sobre() {
     const fadeInUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
@@ -35,13 +36,13 @@ export default function Sobre() {
 
                     <motion.div variants={fadeInUp} style={{
                         height: '600px',
-                        background: 'linear-gradient(45deg, var(--bg-elevated) 0%, var(--bg-panel) 100%)',
                         borderRadius: '8px',
                         border: '1px solid var(--border-strong)',
-                        position: 'relative'
-                    }}>
-                        <div style={{ position: 'absolute', inset: '20px', border: '1px solid rgba(255,255,255,0.05)' }} />
-                        {/* Visual placeholder for team/company image */}
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }} className="hover-glass">
+                        <img src={HqOfficeImg} alt="Sede da Polly Concreto" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <div style={{ position: 'absolute', inset: '20px', border: '1px solid rgba(255,255,255,0.1)', pointerEvents: 'none' }} />
                     </motion.div>
                 </div>
             </div>

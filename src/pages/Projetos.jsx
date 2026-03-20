@@ -211,7 +211,7 @@ export default function Projetos() {
         { title: 'Cond. Terras de São José', subtitle: 'Itu - SP', partner: 'Arquiteto: Sérgio Sampaio', images: [TerrasCapa, Terras2, Terras3, Proj1Img] },
         { title: 'Residência Ibirapuera', subtitle: 'Rua Celta - SP', partner: 'Construtora: Lammart', images: [Celta1, Celta2, Celta3, Celta4] },
         { title: 'Morada dos Lagos', subtitle: 'Aldeia da Serra - SP', partner: 'Engenheiro: Arthur', images: [Morada1, Morada2, Morada3, Morada4, Morada5] },
-        { title: 'Cond. Fazenda Serrazul', subtitle: 'Itupeva - SP', partner: 'Condomínio: Fazenda Serrazul', images: [Serrazul1, Serrazul2, Serrazul3, Serrazul4, Serrazul5, Serrazul6] },
+        { title: 'Cond. Fazenda Serrazul', subtitle: 'Itupeva - SP', partner: 'Arquiteto: Caio Persighini', images: [Serrazul1, Serrazul2, Serrazul3, Serrazul4, Serrazul5, Serrazul6] },
         { title: 'Fazenda Serrazul II', subtitle: 'Projeto Expandido', images: [SerrazulBVideo, SerrazulB1, SerrazulB2, SerrazulB3, SerrazulB4, SerrazulB5, SerrazulB6] },
         { title: 'Cond. Palmeiras Imperiais', subtitle: 'Salto - SP', images: [Palmeiras1, Palmeiras2, Palmeiras3, Palmeiras4, Palmeiras5] },
         { title: 'Obra Predial', subtitle: 'Vila Nova Conceição - SP', partner: 'Construtora: Viewco', images: [VilaNova1, VilaNova2, VilaNova3, VilaNova4, VilaNova5, VilaNova6, VilaNova7] },

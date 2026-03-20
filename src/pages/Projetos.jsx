@@ -123,6 +123,9 @@ const ProjectCard = ({ proj, fadeInUp, onOpenLightbox }) => {
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 80%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2.5rem', pointerEvents: 'none', zIndex: 5 }}>
                 <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>{proj.title}</h3>
                 <p style={{ color: 'var(--accent-silver)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.1em' }}>{proj.subtitle}</p>
+                {proj.partner && (
+                    <p style={{ color: 'var(--brand-orange)', fontSize: '0.9rem', fontWeight: 500, marginTop: '0.5rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{proj.partner}</p>
+                )}
             </div>
         </motion.div>
     )
@@ -191,6 +194,9 @@ const Lightbox = ({ data, onClose }) => {
 
             <div style={{ position: 'absolute', bottom: '2rem', textAlign: 'center', color: '#fff' }}>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '0.2rem' }}>{proj.title}</h3>
+                {proj.partner && (
+                    <p style={{ color: 'var(--brand-orange)', fontSize: '0.95rem', fontWeight: 500, marginBottom: '0.3rem', letterSpacing: '0.05em' }}>{proj.partner}</p>
+                )}
                 <p style={{ color: 'var(--accent-silver)' }}>{currentIndex + 1} / {proj.images.length}</p>
             </div>
         </motion.div>
@@ -202,13 +208,13 @@ export default function Projetos() {
     const fadeInUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }
 
     const projetos = [
-        { title: 'Cond. Terras de São José', subtitle: 'Itu - SP', images: [TerrasCapa, Terras2, Terras3, Proj1Img] },
-        { title: 'Residência Ibirapuera', subtitle: 'Rua Celta - SP', images: [Celta1, Celta2, Celta3, Celta4] },
-        { title: 'Morada dos Lagos', subtitle: 'Aldeia da Serra - SP', images: [Morada1, Morada2, Morada3, Morada4, Morada5] },
-        { title: 'Cond. Fazenda Serrazul', subtitle: 'Itupeva - SP', images: [Serrazul1, Serrazul2, Serrazul3, Serrazul4, Serrazul5, Serrazul6] },
+        { title: 'Cond. Terras de São José', subtitle: 'Itu - SP', partner: 'Arquiteto: Sérgio Sampaio', images: [TerrasCapa, Terras2, Terras3, Proj1Img] },
+        { title: 'Residência Ibirapuera', subtitle: 'Rua Celta - SP', partner: 'Construtora: Lammart', images: [Celta1, Celta2, Celta3, Celta4] },
+        { title: 'Morada dos Lagos', subtitle: 'Aldeia da Serra - SP', partner: 'Engenheiro: Arthur', images: [Morada1, Morada2, Morada3, Morada4, Morada5] },
+        { title: 'Cond. Fazenda Serrazul', subtitle: 'Itupeva - SP', partner: 'Condomínio: Fazenda Serrazul', images: [Serrazul1, Serrazul2, Serrazul3, Serrazul4, Serrazul5, Serrazul6] },
         { title: 'Fazenda Serrazul II', subtitle: 'Projeto Expandido', images: [SerrazulBVideo, SerrazulB1, SerrazulB2, SerrazulB3, SerrazulB4, SerrazulB5, SerrazulB6] },
         { title: 'Cond. Palmeiras Imperiais', subtitle: 'Salto - SP', images: [Palmeiras1, Palmeiras2, Palmeiras3, Palmeiras4, Palmeiras5] },
-        { title: 'Obra Predial', subtitle: 'Vila Nova Conceição - SP', images: [VilaNova1, VilaNova2, VilaNova3, VilaNova4, VilaNova5, VilaNova6, VilaNova7] },
+        { title: 'Obra Predial', subtitle: 'Vila Nova Conceição - SP', partner: 'Construtora: Viewco', images: [VilaNova1, VilaNova2, VilaNova3, VilaNova4, VilaNova5, VilaNova6, VilaNova7] },
     ]
 
     return (
